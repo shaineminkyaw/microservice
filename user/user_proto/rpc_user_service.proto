@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "rpc_user_register.proto";
+import "rpc_verifyCode.proto";
+package pb;
+
+option go_package = "github.com/shaineminkyaw/microservice/pb";
+
+
+service UserService {
+    rpc GetVerifyCode(RequestVerifyCode) returns (ResponseVerifyCode) {};
+    rpc UserRegister(UserRequest) returns (UserResponse) {};
+}

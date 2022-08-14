@@ -54,12 +54,10 @@ type Config struct {
 	Private     *rsa.PrivateKey
 	Public      *rsa.PublicKey
 	SecretKey   string
-	ServerCert  *rsa.PrivateKey
-	ServerKey   *rsa.PublicKey
 }
 
 func Init() *Config {
-	auth_iniPath := "authentication/config/config.ini"
+	auth_iniPath := "user/config/config.ini"
 
 	args := os.Args
 	if len(args) > 1 {
@@ -76,29 +74,6 @@ func Init() *Config {
 	// app
 	auth_app := auth_iniFile.Section("auth_app")
 	App.AppAddress = auth_app.Key("Auth_HTTPAddress").String()
-
-	//Server Credentials
-	// serverCred := auth_iniFile.Section("grpc_credentials")
-	// ServerCredentials.ServerCert = serverCred.Key("Server_Cert").String()
-	// cert, err := ioutil.ReadFile(ServerCredentials.ServerCert)
-	// if err != nil {
-	// 	log.Fatalf(err.Error())
-	// }
-	// certKey, err := jwt.ParseRSAPrivateKeyFromPEM(cert)
-	// if err != nil {
-	// 	log.Fatalf(err.Error())
-	// }
-	// ServerCert = certKey
-	// ServerCredentials.ServerKey = serverCred.Key("Server_Key").String()
-	// key, err := ioutil.ReadFile(ServerCredentials.ServerKey)
-	// if err != nil {
-	// 	log.Fatalf(err.Error())
-	// }
-	// encrptKey, err := jwt.ParseRSAPublicKeyFromPEM(key)
-	// if err != nil {
-	// 	log.Fatalf(err.Error())
-	// }
-	// ServerKey = encrptKey
 
 	//grpc
 	auth_grpc := auth_iniFile.Section("auth_grpc")

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+package pb;
+
+option go_package = "github.com/shaineminkyaw/microservice/pb";
+
+
+message RequestVerifyCode {
+    string email =1;
+}
+
+message ResponseVerifyCode {
+    string code = 1;
+}
