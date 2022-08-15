@@ -13,3 +13,4 @@ message RequestVerifyCode {
 message ResponseVerifyCode {
     string code = 1;
 }
+

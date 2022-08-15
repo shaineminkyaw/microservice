@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+
+import "rpc_login.proto";
+package pb;
+
+option go_package = "github.com/shaineminkyaw/microservice/pb";
+
+
+
+service LoginService {
+    rpc Login(LoginRequest) returns (LoginResponse) {};
+}

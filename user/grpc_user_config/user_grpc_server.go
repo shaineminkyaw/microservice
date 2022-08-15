@@ -50,13 +50,13 @@ func RunGrpcServer() {
 		log.Fatalf("error on source server : %v", err)
 	}
 
-	// tlsCredentials, err := LoadTLSCredentials()
-	// if err != nil {
-	// 	log.Fatalf("cannot load tls credentials %v", err)
-	// }
+	tlsCredentials, err := LoadTLSCredentials()
+	if err != nil {
+		log.Fatalf("cannot load tls credentials %v", err)
+	}
 
 	grpcServer := grpc.NewServer(
-	// grpc.Creds(tlsCredentials),
+		grpc.Creds(tlsCredentials),
 	)
 
 	pb.RegisterUserServiceServer(grpcServer, sourceServer)

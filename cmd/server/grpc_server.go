@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/shaineminkyaw/microservice/user/grpc_user_config"
-)
+import "github.com/shaineminkyaw/microservice/user/grpc_user_config"
 
 func main() {
 

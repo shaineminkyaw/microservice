@@ -32,7 +32,6 @@ func (server *Server) UserRegister(ctx context.Context, req *pb.UserRequest) (*p
 
 	//hash password
 	userPassword, err := util.HashPassword(req.GetPassword())
-	log.Println("User Password ....", userPassword)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "error on hash password")
 	}
@@ -59,10 +58,6 @@ func (server *Server) UserRegister(ctx context.Context, req *pb.UserRequest) (*p
 		Type:           int8(req.GetGenderType()),
 	}
 
-	// if ctx.Err() == context.Canceled {
-	// 	log.Printf("request is canceled")
-	// 	return nil, status.Errorf(codes.Aborted, "request is Cancel")
-	// }
 	// // if ctx.Err() == context.Background().Err() {
 	// // 	log.Printf("request is canceled")
 	// // 	return nil, status.Errorf(codes.Aborted, "request is Cancel!!!!")
@@ -70,6 +65,10 @@ func (server *Server) UserRegister(ctx context.Context, req *pb.UserRequest) (*p
 	fUser := &model.User{}
 	data := server.Database.Sql.Model(&model.User{}).Where("email =?", req.GetEmail())
 	err = data.First(&fUser).Error
+	if ctx.Err() == context.Canceled {
+		log.Printf("request is canceled")
+		return nil, status.Errorf(codes.Aborted, "request is Cancel")
+	}
 	if err == gorm.ErrRecordNotFound {
 		err := server.Database.Sql.Model(&model.User{}).Create(&user).Error
 		if err != nil {
