@@ -26,3 +26,6 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20220805133916-01dd62135a58 // indirect
 )
+
+
+replace "github.com/shaineminkyaw/microservice/pb" => ../pb
